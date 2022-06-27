@@ -3,22 +3,28 @@ import StoreContext from './StoreContext';
 import React, { Component } from 'react';
 
 export default class StoreProvider extends Component {
-  currencyState = {
+  // Context state
+  state = {
     currency: 'USD',
   };
 
-  chooseCurrency = (currency) => {
-    this.setState({ currency });
+  // Method to update state
+  setUser = (user) => {
+    this.setState((prevState) => ({ user }));
+  };
+
+  setCurrency = (currency) => {
+    this.setState((prevState) => ({ currency }));
   };
 
   render() {
-    const { currency } = this.currencyState;
-    const { chooseCurrency } = this;
+    const { currency } = this.state;
+    const { setCurrency } = this;
     return (
       <StoreContext.Provider
         value={{
           currency,
-          chooseCurrency,
+          setCurrency,
         }}
       >
         {this.props.children}

@@ -1,6 +1,19 @@
-*,
-*::after,
-*::before {
+* {
   margin: 0;
-  padding: 0;
-  box-sizing: border-box; }
+  padding: 0; }
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit; }
+
+.header {
+  background-color: #dbdbdb;
+  display: flex;
+  padding: 2rem;
+  justify-content: space-between;
+  text-transform: uppercase; }
+
+.nav__link {
+  margin-right: 2rem;
+  text-decoration: none; }
