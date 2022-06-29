@@ -17,3 +17,17 @@
 .nav__link {
   margin-right: 2rem;
   text-decoration: none; }
+
+.home {
+  display: flex;
+  flex-wrap: wrap; }
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  margin: 3rem;
+  background-color: #fff;
+  width: 20rem; }
+  .product-card__image {
+    width: 20rem;
+    height: 20rem; }

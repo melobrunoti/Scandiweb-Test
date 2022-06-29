@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import client from '../Connection/Client';
 
 import StoreContext from '../Context/StoreContext';
-import { loadCurrencies } from '../GraphQL/CurrencyQuerie';
-import { loadCategories } from '../GraphQL/CategoriesQuerie';
+import { loadCurrencies } from '../GraphQL/CurrencyQueries';
+import { loadCategories } from '../GraphQL/CategoriesQueries';
+import { Link } from 'react-router-dom';
 
 export default class Header extends Component {
   constructor() {
@@ -36,11 +37,19 @@ export default class Header extends Component {
       <div className="header">
         <nav className="nav">
           {categories &&
-            categories.map(({ name }) => (
-              <a className="nav__link" href="#">
-                {name}
-              </a>
-            ))}
+            categories.map(({ name }) => {
+              if (name === 'all')
+                return (
+                  <Link className="nav__link" to={'/'}>
+                    {name}
+                  </Link>
+                );
+              return (
+                <Link className="nav__link" to={name}>
+                  {name}
+                </Link>
+              );
+            })}
         </nav>
         <div>
           <label htmlFor="currency">$</label>
