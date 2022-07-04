@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import StoreContext from '../Context/StoreContext';
 
 export default class Card extends Component {
@@ -9,7 +10,7 @@ export default class Card extends Component {
     return (
       <>
         {products &&
-          products.map(({ name, gallery, prices, inStock, category }) => {
+          products.map(({ name, gallery, prices, inStock, category, id }) => {
             const filteredPrice = prices.find(
               (c) => c.currency.label === currency
             );
@@ -24,6 +25,7 @@ export default class Card extends Component {
                 ></img>
                 <span>{name}</span>
                 <span>{`${symbol} ${amount}`}</span>
+                <Link to={id}>buy</Link>
               </div>
             );
           })}

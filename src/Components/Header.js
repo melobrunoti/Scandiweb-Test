@@ -32,7 +32,6 @@ export default class Header extends Component {
   render() {
     const { currency, setCurrency } = this.context;
     const { currencies, categories } = this.state;
-    /*     console.log(categories[0]); */
     return (
       <div className="header">
         <nav className="nav">
@@ -40,12 +39,12 @@ export default class Header extends Component {
             categories.map(({ name }) => {
               if (name === 'all')
                 return (
-                  <Link className="nav__link" to={'/'}>
+                  <Link className="nav__link" key={name} to={'/'}>
                     {name}
                   </Link>
                 );
               return (
-                <Link className="nav__link" to={name}>
+                <Link className="nav__link" key={name} to={name}>
                   {name}
                 </Link>
               );
