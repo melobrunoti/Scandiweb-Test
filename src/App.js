@@ -18,10 +18,9 @@ class App extends Component {
         <BrowserRouter>
           <Header />
           <Route exact path="/" component={Home}></Route>
-          <Route path="/:id" component={DetailedPage}></Route>
-          <Route path="/tech/:id" component={DetailedPage}></Route>
-          <Route path="/clothes/:id" component={DetailedPage}></Route>
-          <Route path="/tech" component={Tech}></Route>
+          <Route exact path="/all" component={Home}></Route>
+          <Route exact path="/product/:id" component={DetailedPage}></Route>
+          <Route exact path="/tech" component={Tech}></Route>
           <Route path="/clothes" component={Clothes}></Route>
         </BrowserRouter>
       </ApolloProvider>

@@ -37,14 +37,8 @@ export default class Header extends Component {
         <nav className="nav">
           {categories &&
             categories.map(({ name }) => {
-              if (name === 'all')
-                return (
-                  <Link className="nav__link" key={name} to={'/'}>
-                    {name}
-                  </Link>
-                );
               return (
-                <Link className="nav__link" key={name} to={name}>
+                <Link className="nav__link" key={name} to={`/${name}`}>
                   {name}
                 </Link>
               );
