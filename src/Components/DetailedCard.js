@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import StoreContext from '../Context/StoreContext';
 import { choosePrice } from '../utils/ChoosePrice';
+import Attributes from './Attributes';
+import Colors from './Colors';
 
 export default class DetailedCard extends Component {
   static contextType = StoreContext;
   render() {
-    const product = this.props.product;
+    const { product, selectedAttributes, setAttributes } = this.props;
     const { currency } = this.context;
+
     return (
       <>
         <div>
@@ -23,22 +26,31 @@ export default class DetailedCard extends Component {
         <h1>{product.brand}</h1>
         <h2>{product.name}</h2>
         {product.attributes &&
-          product.attributes.map((item) => (
-            <div key={item.name}>
-              <h2>{item.name}</h2>
+          product.attributes.map(({ name, items }) => (
+            <div key={name}>
+              <h2>{name}</h2>
               <div>
-                {item.items.map((att) => {
-                  if (item.name === 'Color') {
+                {items.map((attribute) => {
+                  if (name === 'Color') {
                     return (
-                      <div
-                        key={att.displayValue}
-                        style={{ backgroundColor: att.value }}
-                      >
-                        -
-                      </div>
+                      <Colors
+                        attribute={attribute}
+                        name={name}
+                        selectedAttributes={selectedAttributes}
+                        setAttributes={setAttributes}
+                        key={attribute.displayValue}
+                      />
                     );
                   }
-                  return <div key={att.displayValue}>{att.displayValue}</div>;
+                  return (
+                    <Attributes
+                      attribute={attribute}
+                      name={name}
+                      selectedAttributes={selectedAttributes}
+                      setAttributes={setAttributes}
+                      key={attribute.displayValue}
+                    />
+                  );
                 })}
               </div>
               {choosePrice(product.prices, currency)}

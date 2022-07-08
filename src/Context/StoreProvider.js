@@ -6,11 +6,11 @@ export default class StoreProvider extends Component {
   // Context state
   state = {
     currency: 'USD',
+    cart: [],
   };
 
-  // Method to update state
-  setUser = (user) => {
-    this.setState((prevState) => ({ user }));
+  addToCart = (product) => {
+    this.setState((prevState) => [...prevState, product]);
   };
 
   setCurrency = (currency) => {

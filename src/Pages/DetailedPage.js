@@ -6,7 +6,14 @@ import { loadDetailedProduct } from '../GraphQL/DetailedProductQueries';
 export default class DetailedPage extends Component {
   constructor(props) {
     super();
-    this.state = { product: {} };
+    this.state = { product: {}, selectedAttributes: {} };
+    this.setAttributes = this.setAttributes.bind(this);
+  }
+
+  setAttributes(key, value) {
+    this.setState(({ selectedAttributes }) => ({
+      selectedAttributes: { ...selectedAttributes, [key]: value },
+    }));
   }
 
   async componentDidMount() {
@@ -22,7 +29,17 @@ export default class DetailedPage extends Component {
   }
 
   render() {
-    const { product } = this.state;
-    return <div>{product && <DetailedCard product={product} />}</div>;
+    const { product, selectedAttributes } = this.state;
+    return (
+      <div>
+        {product && (
+          <DetailedCard
+            product={product}
+            setAttributes={this.setAttributes}
+            selectedAttributes={selectedAttributes}
+          />
+        )}
+      </div>
+    );
   }
 }

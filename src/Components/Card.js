@@ -12,11 +12,6 @@ export default class Card extends Component {
       <>
         {products &&
           products.map(({ name, gallery, prices, inStock, category, id }) => {
-            /*   const filteredPrice = prices.find(
-              (c) => c.currency.label === currency
-            );
-            const { symbol } = filteredPrice.currency;
-            const { amount } = filteredPrice; */
             return (
               <div key={name} className="product-card">
                 <img
