@@ -9,8 +9,11 @@ export default class StoreProvider extends Component {
     cart: [],
   };
 
-  addToCart = (product) => {
-    this.setState((prevState) => [...prevState, product]);
+  addToCart = (product, attributes) => {
+    product = { ...product, selected: attributes };
+    this.setState({
+      cart: [...this.state.cart, product],
+    });
   };
 
   setCurrency = (currency) => {
@@ -18,13 +21,15 @@ export default class StoreProvider extends Component {
   };
 
   render() {
-    const { currency } = this.state;
-    const { setCurrency } = this;
+    const { currency, cart } = this.state;
+    const { setCurrency, addToCart } = this;
     return (
       <StoreContext.Provider
         value={{
           currency,
           setCurrency,
+          cart,
+          addToCart,
         }}
       >
         {this.props.children}
