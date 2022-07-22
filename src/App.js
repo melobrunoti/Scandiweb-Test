@@ -10,6 +10,7 @@ import Tech from './Pages/Tech';
 import Clothes from './Pages/Clothes';
 import DetailedPage from './Pages/DetailedPage';
 import { BrowserRouter, Route } from 'react-router-dom';
+import CartPage from './Pages/CartPage';
 
 class App extends Component {
   render() {
@@ -22,6 +23,7 @@ class App extends Component {
           <Route exact path="/product/:id" component={DetailedPage}></Route>
           <Route exact path="/tech" component={Tech}></Route>
           <Route path="/clothes" component={Clothes}></Route>
+          <Route path="/cart" component={CartPage}></Route>
         </BrowserRouter>
       </ApolloProvider>
     );
