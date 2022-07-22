@@ -32,13 +32,13 @@ export default class DetailedPage extends Component {
     const { product, selectedAttributes } = this.state;
     return (
       <div>
-        {product && (
+        {
           <DetailedCard
             product={product}
             setAttributes={this.setAttributes}
             selectedAttributes={selectedAttributes}
           />
-        )}
+        }
       </div>
     );
   }

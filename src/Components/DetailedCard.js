@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import StoreContext from '../Context/StoreContext';
 import { choosePrice } from '../utils/ChoosePrice';
 import Attributes from './Attributes';
-import Colors from './Colors';
 
 export default class DetailedCard extends Component {
   static contextType = StoreContext;
@@ -47,17 +46,6 @@ export default class DetailedCard extends Component {
                   <h2>{name}</h2>
                   <div>
                     {items.map((attribute) => {
-                      if (name === 'Color') {
-                        return (
-                          <Colors
-                            attribute={attribute}
-                            name={name}
-                            selectedAttributes={selectedAttributes}
-                            setAttributes={setAttributes}
-                            key={attribute.displayValue}
-                          />
-                        );
-                      }
                       return (
                         <Attributes
                           attribute={attribute}
@@ -65,6 +53,7 @@ export default class DetailedCard extends Component {
                           selectedAttributes={selectedAttributes}
                           setAttributes={setAttributes}
                           key={attribute.displayValue}
+                          isCartItem={false}
                         />
                       );
                     })}
