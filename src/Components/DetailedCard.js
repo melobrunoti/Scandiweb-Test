@@ -10,6 +10,10 @@ export default class DetailedCard extends Component {
     const { product, selectedAttributes, setAttributes } = this.props;
     const { currency, addToCart } = this.context;
 
+    function addProduct(product) {
+      return product = { ...product, selected: selectedAttributes };
+    }
+
     function enableButton() {
       if (!selectedAttributes) return true;
 
@@ -64,7 +68,7 @@ export default class DetailedCard extends Component {
             {product && (
               <button
                 disabled={enableButton()}
-                onClick={() => addToCart(product, selectedAttributes)}
+                onClick={() => addToCart(addProduct(product))}
               >
                 Add to Cart
               </button>

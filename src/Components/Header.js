@@ -45,6 +45,9 @@ export default class Header extends Component {
             })}
         </nav>
         <div>
+          <Link className="nav__link" to={'/cart'}>
+            Cart
+          </Link>
           <label htmlFor="currency">$</label>
           <select
             value={currency}

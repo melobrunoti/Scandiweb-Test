@@ -10,7 +10,8 @@ export default class CartItems extends Component {
     return (
       <div>
         {cart &&
-          cart.map((product) => {
+          cart.map((item) => {
+            const product = item[Object.keys(item)]
             return (
               <div key={product.name}>
                 <h2>{product.brand}</h2>
