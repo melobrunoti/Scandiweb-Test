@@ -40,13 +40,44 @@ export default class StoreProvider extends Component {
     });
   };
 
+  removeItem = (product) => {
+    const customId = `${product.id}${Object.values(product.selected)}`;
+
+    this.setState((prevState) => {
+      const customItem = prevState.cart.find((item) => Object.keys(item).toString() === customId);
+      const test = customItem[customId];
+      if (test.quantity === 1) {
+
+        console.log(prevState.cart.filter(((item) => Object.keys(item).toString() !== customId)));
+        return {
+          cart: 
+            prevState.cart.filter(((item) => Object.keys(item).toString() !== customId)),
+          
+        }
+      }
+
+      return {
+        cart: prevState.cart.map((item) => {
+          const customItem = item[customId];
+          if (Object.keys(item).toString() === customId) {
+            return {
+              [customId]: { ...customItem, quantity: customItem.quantity - 1  },
+            };
+          }
+          return item;
+        }),
+      };
+    });
+  };
+
+
   setCurrency = (currency) => {
     this.setState(() => ({ currency }));
   };
 
   render() {
     const { currency, cart } = this.state;
-    const { setCurrency, addToCart } = this;
+    const { setCurrency, addToCart, removeItem } = this;
     return (
       <StoreContext.Provider
         value={{
@@ -54,6 +85,7 @@ export default class StoreProvider extends Component {
           setCurrency,
           cart,
           addToCart,
+          removeItem,
         }}
       >
         {this.props.children}
