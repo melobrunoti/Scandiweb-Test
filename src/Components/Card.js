@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import StoreContext from '../Context/StoreContext';
-import { choosePrice } from '../utils/ChoosePrice';
+import { choosePriceAndSymbol } from '../utils/ChoosePrice';
 
 export default class Card extends Component {
   static contextType = StoreContext;
+
   render() {
     const products = this.props.products;
     const { currency } = this.context;
@@ -20,7 +21,7 @@ export default class Card extends Component {
                   className="product-card__image"
                 ></img>
                 <span>{name}</span>
-                <span>{choosePrice(prices, currency)}</span>
+                <span>{choosePriceAndSymbol(prices, currency)}</span>
                 <Link to={`/product/${id}`}>buy</Link>
               </div>
             );

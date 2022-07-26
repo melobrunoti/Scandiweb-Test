@@ -12,6 +12,7 @@ export default class Header extends Component {
     this.state = { currencies: [], categories: '' };
   }
 
+ 
   static contextType = StoreContext;
 
   async componentDidMount() {
@@ -32,6 +33,7 @@ export default class Header extends Component {
   render() {
     const { currency, setCurrency } = this.context;
     const { currencies, categories } = this.state;
+
     return (
       <div className="header">
         <nav className="nav">

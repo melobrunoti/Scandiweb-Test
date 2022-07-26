@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import StoreContext from '../Context/StoreContext';
-import { choosePrice } from '../utils/ChoosePrice';
+import { choosePriceAndSymbol } from '../utils/ChoosePrice';
 import Attributes from './Attributes';
 
 export default class DetailedCard extends Component {
@@ -11,7 +11,7 @@ export default class DetailedCard extends Component {
     const { currency, addToCart } = this.context;
 
     function addProduct(product) {
-      return product = { ...product, selected: selectedAttributes };
+      return (product = { ...product, selected: selectedAttributes });
     }
 
     function enableButton() {
@@ -64,7 +64,7 @@ export default class DetailedCard extends Component {
                   </div>
                 </div>
               ))}
-            {product.prices && choosePrice(product.prices, currency)}
+            {product.prices && choosePriceAndSymbol(product.prices, currency)}
             {product && (
               <button
                 disabled={enableButton()}
