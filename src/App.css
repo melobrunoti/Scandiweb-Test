@@ -28,14 +28,59 @@ body {
   min-height: 100vh; }
 
 .header {
+  position: relative;
   display: flex;
   padding: 2rem;
   justify-content: space-between;
-  text-transform: uppercase; }
+  text-transform: uppercase;
+  margin: 0 11.7rem;
+  align-items: center; }
+
+.logo {
+  position: absolute;
+  right: 50.0%;
+  right: 50.0%;
+  top: 20.75%;
+  bottom: 29.47%; }
 
 .nav__link {
   margin-right: 2rem;
-  text-decoration: none; }
+  text-decoration: none;
+  color: inherit; }
+  .nav__link:hover {
+    color: var(--color-green);
+    border-bottom: 2px solid var(--color-green);
+    padding-bottom: 1.3rem;
+    transition: all .2s; }
+
+.select {
+  cursor: pointer;
+  width: 2rem;
+  font-size: 1.8rem;
+  border: 0;
+  background-color: transparent; }
+  .select:focus {
+    border: none; }
+  .select:hover {
+    background-color: #EEEEEE; }
+
+option {
+  color: var(--color-grey-dark);
+  font-size: 1.8rem;
+  font-weight: 500;
+  border: none; }
+  option:hover {
+    background-color: #EEEEEE; }
+
+.selected {
+  background-color: DodgerBlue; }
+
+.cart-container {
+  display: flex;
+  align-items: center; }
+
+.cart {
+  margin-top: .5rem; }
 
 .home {
   display: flex;
