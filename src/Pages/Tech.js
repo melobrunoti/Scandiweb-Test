@@ -21,7 +21,10 @@ export default class Tech extends Component {
   render() {
     const { products } = this.state;
     return (
-      <div className="home">{products && <Card products={products} />}</div>
+      <>
+        <h1 className="title">Tech</h1>
+        <div>{products && <Card products={products} />}</div>
+      </>
     );
   }
 }

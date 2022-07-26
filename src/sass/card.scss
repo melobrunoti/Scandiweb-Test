@@ -1,11 +1,66 @@
+
+.title {
+  margin: 8rem 10rem;
+}
+
+
+.home {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 2rem;
+ }
+
+
 .product-card {
   display: flex;
   flex-direction: column;
-  margin: 3rem;
-background-color: #fff;
-  width: 20rem;
- &__image {
-  width: 20rem;
-  height: 20rem;
- }
+  margin: 2rem 5rem;
+  background-color: #fff;
+  width: 38.6rem;
+  height: 46.4rem;
+  position: relative;
+ 
+ 
+  &:hover  &__button {
+    opacity: 1;
+    transition: all .5s;
+  }
+  
+  &:hover {
+    box-shadow: var(--shadow);
+  }
+
+  &__button {
+    position: absolute;
+    right: 8%;
+    bottom: 16%;
+    opacity: 0;
+
+  }
+
+  &__image-container {
+    width: 35.04rem;
+    height: 36rem;
+    overflow: hidden;
+    margin-bottom: 2rem;
+
+  }
+
+  &__image {
+    position: relative; 
+    padding: 1rem;
+    align-self: none;
+    width: 100%;
+    height: auto;
+    top: -2rem;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    font-weight: 300;
+    margin-left: 2rem;
+
+  }
 }
