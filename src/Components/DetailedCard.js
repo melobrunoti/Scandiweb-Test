@@ -6,6 +6,11 @@ import Attributes from './Attributes';
 export default class DetailedCard extends Component {
   static contextType = StoreContext;
 
+  constructor(props) {
+    super(props);
+    this.state = { selectedImage: 0 };
+  }
+
   render() {
     const { product, selectedAttributes, setAttributes } = this.props;
     const { currency, addToCart } = this.context;
@@ -26,20 +31,29 @@ export default class DetailedCard extends Component {
       return true;
     }
 
+    const chooseImage = (index) => {
+      this.setState({ selectedImage: index });
+    };
     return (
-      <>
+      <div className="detailed-card">
         {product && (
           <div>
             <div>
               {product.gallery &&
-                product.gallery.map((item) => (
+                product.gallery.map((item, index) => (
                   <img
+                    onClick={() => chooseImage(index)}
                     key={item}
                     src={item}
                     alt={item}
-                    className="product-card__image"
+                    className="not-selected"
                   ></img>
                 ))}
+            </div>
+            <div>
+              {product.gallery && (
+                <img src={product.gallery[this.state.selectedImage]} alt="oi" />
+              )}
             </div>
             <h1>{product.brand}</h1>
             <h2>{product.name}</h2>
@@ -76,7 +90,7 @@ export default class DetailedCard extends Component {
             <div dangerouslySetInnerHTML={{ __html: product.description }} />
           </div>
         )}
-      </>
+      </div>
     );
   }
 }
