@@ -37,57 +37,79 @@ export default class DetailedCard extends Component {
     return (
       <div className="detailed-card">
         {product && (
-          <div>
-            <div>
-              {product.gallery &&
-                product.gallery.map((item, index) => (
+          <div className="detailed-card__container">
+            <div className="detailed-card__container__img">
+              <div className="detailed-card__container__img__not-selected">
+                {product.gallery &&
+                  product.gallery.map((item, index) => (
+                    <img
+                      onClick={() => chooseImage(index)}
+                      key={item}
+                      src={item}
+                      alt={item}
+                      className="detailed-card__container__img__not-selected__image"
+                    ></img>
+                  ))}
+              </div>
+              <div className="detailed-card__container__img__selected-container">
+                {product.gallery && (
                   <img
-                    onClick={() => chooseImage(index)}
-                    key={item}
-                    src={item}
-                    alt={item}
-                    className="not-selected"
-                  ></img>
-                ))}
+                    src={product.gallery[this.state.selectedImage]}
+                    alt={product.name}
+                    className="detailed-card__container__img__selected-container__img"
+                  />
+                )}
+              </div>
             </div>
-            <div>
-              {product.gallery && (
-                <img src={product.gallery[this.state.selectedImage]} alt="oi" />
+            <div className="detailed-card__container__info-container">
+              <h1 className="detailed-card__product__brand">{product.brand}</h1>
+              <h2 className="detailed-card__product__name">{product.name}</h2>
+              <div className="attributes-container">
+                {product.attributes &&
+                  product.attributes.map(({ name, items }) => (
+                    <div
+                      key={name}
+                      className="detailed-card__product__attributes"
+                    >
+                      <h3 className="detailed-card__product__attributes__name">
+                        {name}
+                      </h3>
+                      <div className="detailed-card__product__attributes__attribute">
+                        {items.map((attribute) => {
+                          return (
+                            <Attributes
+                              attribute={attribute}
+                              name={name}
+                              selectedAttributes={selectedAttributes}
+                              setAttributes={setAttributes}
+                              key={attribute.displayValue}
+                              isCartItem={false}
+                            />
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ))}
+              </div>
+              <h3 className="detailed-card__product__price__title">Price:</h3>
+              <span className="detailed-card__product__price">
+                {product.prices &&
+                  choosePriceAndSymbol(product.prices, currency)}
+              </span>
+              {product && (
+                <button
+                  className="button detailed-card__button green-button"
+                  disabled={enableButton()}
+                  onClick={() => addToCart(addProduct(product))}
+                >
+                  Add to Cart
+                </button>
               )}
+              <div
+                className="detailed-card__description"
+                dangerouslySetInnerHTML={{ __html: product.description }}
+              />
             </div>
-            <h1>{product.brand}</h1>
-            <h2>{product.name}</h2>
-
-            {product.attributes &&
-              product.attributes.map(({ name, items }) => (
-                <div key={name}>
-                  <h2>{name}</h2>
-                  <div>
-                    {items.map((attribute) => {
-                      return (
-                        <Attributes
-                          attribute={attribute}
-                          name={name}
-                          selectedAttributes={selectedAttributes}
-                          setAttributes={setAttributes}
-                          key={attribute.displayValue}
-                          isCartItem={false}
-                        />
-                      );
-                    })}
-                  </div>
-                </div>
-              ))}
-            {product.prices && choosePriceAndSymbol(product.prices, currency)}
-            {product && (
-              <button
-                disabled={enableButton()}
-                onClick={() => addToCart(addProduct(product))}
-              >
-                Add to Cart
-              </button>
-            )}
-            <div dangerouslySetInnerHTML={{ __html: product.description }} />
           </div>
         )}
       </div>

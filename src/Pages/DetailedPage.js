@@ -31,7 +31,7 @@ export default class DetailedPage extends Component {
   render() {
     const { product, selectedAttributes } = this.state;
     return (
-      <div>
+      <div className="detailed-container">
         {
           <DetailedCard
             product={product}

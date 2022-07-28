@@ -35,6 +35,21 @@ body {
   line-height: 1.6;
   background-color: var(--color-bg);
   color: var(--color-grey-dark);
-
   min-height: 100vh;
+  height: 100%;
+}
+
+.button {
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.3;
+  }
+}
+
+.green-button {
+  color: white;
+  background-color: var(--color-green);
 }

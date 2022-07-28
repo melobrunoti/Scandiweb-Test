@@ -7,27 +7,40 @@ export default class Attributes extends Component {
       <>
         {name === 'Color' ? (
           <div
-            style={{
-              backgroundColor: attribute.value,
-            }}
             className={
               selectedAttributes && selectedAttributes[name] === attribute.value
-                ? 'selected'
-                : ''
+                ? 'color-selected-boder'
+                : 'color-not-selected-border'
             }
-            onClick={() => {
-              !isCartItem && this.props.setAttributes(name, attribute.value);
-            }}
           >
-            -
+            <div
+              style={{
+                backgroundColor: attribute.value,
+                color: 'transparent',
+              }}
+              className="color-selected"
+              /*  className={
+                selectedAttributes &&
+                selectedAttributes[name] === attribute.value
+                  ? 'color-selected'
+                  : 'attribute-block'
+              } */
+              onClick={() => {
+                !isCartItem && this.props.setAttributes(name, attribute.value);
+              }}
+            >
+              -
+            </div>
           </div>
         ) : (
           <div
-            onClick={() => !isCartItem && this.props.setAttributes(name, attribute.value)}
+            onClick={() =>
+              !isCartItem && this.props.setAttributes(name, attribute.value)
+            }
             className={
               selectedAttributes && selectedAttributes[name] === attribute.value
-                ? 'attribute-selected'
-                : ''
+                ? 'attribute attribute-selected'
+                : 'attribute attribute-not-selected'
             }
             key={attribute.displayValue}
           >
