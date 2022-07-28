@@ -35,7 +35,6 @@ export default class CartItems extends Component {
                               attribute={attribute}
                               name={name}
                               selectedAttributes={product.selected}
-                              // setAttributes={setAttributes}
                               key={attribute.displayValue}
                               isCartItem={true}
                             />

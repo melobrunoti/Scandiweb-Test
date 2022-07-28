@@ -9,7 +9,7 @@ export default class StoreProvider extends Component {
     currency: 'USD',
     cart: [],
   };
-  
+
   componentDidMount() {
     this.getCurrencyFromLocalStorage();
     this.getCartFromLocalStorage();
@@ -24,14 +24,18 @@ export default class StoreProvider extends Component {
     const local = localStorage.getItem('currency');
     const currency = JSON.parse(local);
 
-    this.setState(() => ({ currency }));
+    if (currency !== null) {
+      this.setState(() => ({ currency }));
+    }
   };
 
   getCartFromLocalStorage = () => {
     const local = localStorage.getItem('cart');
     const cart = JSON.parse(local);
 
-    this.setState(() => ({ cart }));
+    if (cart) {
+      this.setState(() => ({ cart }));
+    }
   };
 
   addToCart = async (product) => {
@@ -39,7 +43,7 @@ export default class StoreProvider extends Component {
 
     this.setState((prevState) => {
       if (
-        !prevState.cart.some(
+        !prevState.cart?.some(
           (item) => Object.keys(item).toString() === customId
         )
       ) {
@@ -111,13 +115,7 @@ export default class StoreProvider extends Component {
 
   render() {
     const { currency, cart } = this.state;
-    const {
-      setCurrency,
-      addToCart,
-      removeFromCart,
-      getTotal,
-      getLocal,
-    } = this;
+    const { setCurrency, addToCart, removeFromCart, getTotal, getLocal } = this;
     return (
       <StoreContext.Provider
         value={{
