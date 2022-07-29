@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import StoreContext from '../Context/StoreContext';
 import { choosePriceAndSymbol } from '../utils/ChoosePrice';
 import Attributes from './Attributes';
+import arrowRight from '../assets/arrowRight.svg';
+import arrowLeft from '../assets/arrowLeft.svg';
 
 export default class CartItems extends Component {
   static contextType = StoreContext;
@@ -9,44 +11,179 @@ export default class CartItems extends Component {
   constructor() {
     super();
     this.state = { cart: [] };
+    this.state = { selectedImage: [] };
   }
 
   render() {
-    const { currency, getTotal, cart } = this.context;
+    const {
+      currency,
+      getTotal,
+      cart,
+      addToCart,
+      removeFromCart,
+      currencies,
+      getQuantity,
+    } = this.context;
+
+    const getSymbol = () => {
+      const symbol = currencies.find((c) => c.label === currency);
+      if (symbol) {
+        return symbol.symbol;
+      }
+    };
+
+    const nextImg = (index, length) => {
+      this.setState((prevState) => {
+        if (
+          !prevState.selectedImage.some((item) => item.id === index) &&
+          length !== 1
+        ) {
+          console.log(length);
+          console.log('cheguei');
+          return {
+            selectedImage: [
+              ...prevState.selectedImage,
+              { id: index, value: 1 },
+            ],
+          };
+        }
+
+        return {
+          selectedImage: prevState.selectedImage.map((item) => {
+            if (item.id === index && item.value < length - 1) {
+              return { ...item, value: item.value + 1 };
+            }
+            return item;
+          }),
+        };
+      });
+    };
+
+    const previusImg = (index) => {
+      this.setState((prevState) => {
+        return {
+          selectedImage: prevState.selectedImage.map((item) => {
+            if (item.id === index && item.value > 0) {
+              return { ...item, value: item.value - 1 };
+            }
+            return item;
+          }),
+        };
+      });
+    };
+
+    const getImg = (e) => {
+      const img = this.state.selectedImage?.find((i) => i.id === e);
+      if (img) {
+        return img.value;
+      }
+      return 0;
+    };
 
     return (
       <div>
-        {cart &&
-          cart.map((item) => {
-            const product = item[Object.keys(item)];
-            return (
-              <div key={product.name}>
-                <h2>{product.brand}</h2>
-                <h3>{product.name}</h3>
-                <span>{choosePriceAndSymbol(product.prices, currency)}</span>
-                {product.attributes &&
-                  product.attributes.map(({ name, items }) => (
-                    <div key={name}>
-                      <h2>{name}</h2>
-                      <div>
-                        {items.map((attribute) => {
-                          return (
-                            <Attributes
-                              attribute={attribute}
-                              name={name}
-                              selectedAttributes={product.selected}
-                              key={attribute.displayValue}
-                              isCartItem={true}
-                            />
-                          );
-                        })}
-                      </div>
+        {cart.length >= 1 && (
+          <div>
+            {cart.map((item, index) => {
+              const product = item[Object.keys(item)];
+              return (
+                <div className="cart-item__container" key={index}>
+                  <div>
+                    <h2 className="">{product.brand}</h2>
+                    <h3 className="">{product.name}</h3>
+                    <span>
+                      {choosePriceAndSymbol(product.prices, currency)}
+                    </span>
+
+                    <div className="attributes-container">
+                      {product.attributes &&
+                        product.attributes.map(({ name, items }) => (
+                          <div
+                            className="detailed-card__product__attributes"
+                            key={name}
+                          >
+                            <h3 className="detailed-card__product__attributes__name">
+                              {name}
+                            </h3>
+                            <div className="detailed-card__product__attributes__attribute">
+                              {items.map((attribute) => {
+                                return (
+                                  <Attributes
+                                    attribute={attribute}
+                                    name={name}
+                                    selectedAttributes={product.selected}
+                                    key={attribute.displayValue}
+                                    isCartItem={true}
+                                  />
+                                );
+                              })}
+                            </div>
+                          </div>
+                        ))}
                     </div>
-                  ))}
-              </div>
-            );
-          })}
-        <h2>{getTotal()}</h2>
+                  </div>
+                  <div className="cart-item__image-container">
+                    <div className="cart-item__image-container-btn-container">
+                      <button
+                        onClick={() => addToCart(product)}
+                        className="cart-item__image-container-btn-container__btn"
+                      >
+                        +
+                      </button>
+                      <span>{product.quantity}</span>
+                      <button
+                        onClick={() => removeFromCart(product)}
+                        className="cart-item__image-container-btn-container__btn"
+                      >
+                        -
+                      </button>
+                    </div>
+
+                    <div className="cart-item__image-container-img">
+                      {product.gallery && (
+                        <>
+                          <img
+                            src={product.gallery[getImg(index)]}
+                            alt={product.name}
+                            className="cart-item__image"
+                          />
+                          <div className="cart-item__image__buttons">
+                            <button
+                              className="cart-item__image__buttons__btn"
+                              onClick={() => previusImg(index)}
+                            >
+                              {<img src={arrowLeft} alt="previous img" />}
+                            </button>
+                            <button
+                              className="cart-item__image__buttons__btn"
+                              onClick={() =>
+                                nextImg(index, product.gallery.length)
+                              }
+                            >
+                              {<img src={arrowRight} alt="next img" />}
+                            </button>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+            <div className="order-container">
+              <h3>Tax 21%: {(getTotal() * 0.21).toFixed(2)}</h3>
+              <h3>Quantity: {getQuantity()}</h3>
+              <h3>
+                {' '}
+                {getSymbol()}
+                {getTotal().toFixed(2)}
+              </h3>
+              <button className="button green-button order-button">
+                Order
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     );
   }

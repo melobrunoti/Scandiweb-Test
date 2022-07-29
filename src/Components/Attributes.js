@@ -42,7 +42,7 @@ export default class Attributes extends Component {
                 ? 'attribute attribute-selected'
                 : 'attribute attribute-not-selected'
             }
-            key={attribute.displayValue}
+            key={attribute.value}
           >
             {attribute.displayValue}
           </div>

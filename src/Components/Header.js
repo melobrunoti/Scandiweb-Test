@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import client from '../Connection/Client';
 
 import StoreContext from '../Context/StoreContext';
-import { loadCurrencies } from '../GraphQL/CurrencyQueries';
 import { loadCategories } from '../GraphQL/CategoriesQueries';
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo.svg';
@@ -11,29 +10,24 @@ import cart from '../assets/cart.svg';
 export default class Header extends Component {
   constructor() {
     super();
-    this.state = { currencies: [], categories: '' };
+    this.state = { categories: '' };
   }
 
   static contextType = StoreContext;
 
   async componentDidMount() {
-    const fetchCurrencies = await client.query({
-      query: loadCurrencies,
-    });
-
     const fetchCategories = await client.query({
       query: loadCategories,
     });
 
-    const currencies = fetchCurrencies.data.currencies;
     const categories = fetchCategories.data.categories;
 
-    this.setState((prevState) => ({ currencies, categories }));
+    this.setState((prevState) => ({ categories }));
   }
 
   render() {
-    const { currency, setCurrency } = this.context;
-    const { currencies, categories } = this.state;
+    const { currency, setCurrency, currencies } = this.context;
+    const { categories } = this.state;
 
     return (
       <div className="header">

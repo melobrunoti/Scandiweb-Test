@@ -2,17 +2,32 @@ import StoreContext from './StoreContext';
 
 import React, { Component } from 'react';
 import { choosenPrice } from '../utils/ChoosePrice';
+import { loadCurrencies } from '../GraphQL/CurrencyQueries';
+import client from '../Connection/Client';
 
 export default class StoreProvider extends Component {
   // Context state
   state = {
     currency: 'USD',
     cart: [],
+    currencies: [],
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     this.getCurrencyFromLocalStorage();
     this.getCartFromLocalStorage();
+
+    const fetchCurrencies = await client.query({
+      query: loadCurrencies,
+    });
+
+    const currencies = fetchCurrencies.data.currencies;
+
+    this.setState((prevState) => ({ currencies }));
+  }
+
+  componentDidUpdate() {
+    localStorage.setItem('cart', JSON.stringify(this.state.cart));
   }
 
   setCurrency = (currency) => {
@@ -47,11 +62,12 @@ export default class StoreProvider extends Component {
           (item) => Object.keys(item).toString() === customId
         )
       ) {
+        console.log('first time');
         const createItem = [
           ...prevState.cart,
           { [customId]: { ...product, quantity: 1 } },
         ];
-        localStorage.setItem('cart', JSON.stringify(createItem));
+
         return { cart: createItem };
       }
 
@@ -59,12 +75,11 @@ export default class StoreProvider extends Component {
         cart: prevState.cart.map((item) => {
           const customItem = item[customId];
           if (Object.keys(item).toString() === customId) {
-            const increaseItem = {
+            return {
               [customId]: { ...customItem, quantity: customItem.quantity + 1 },
             };
-            localStorage.setItem('cart', JSON.stringify(increaseItem));
-            return increaseItem;
           }
+
           return item;
         }),
       };
@@ -85,7 +100,7 @@ export default class StoreProvider extends Component {
             (item) => Object.keys(item).toString() !== customId
           ),
         };
-        localStorage.setItem('cart', JSON.stringify(removeItem));
+
         return removeItem;
       }
 
@@ -96,7 +111,7 @@ export default class StoreProvider extends Component {
             const removeItem = {
               [customId]: { ...customItem, quantity: customItem.quantity - 1 },
             };
-            localStorage.setItem('cart', JSON.stringify(removeItem));
+
             return removeItem;
           }
           return item;
@@ -113,12 +128,27 @@ export default class StoreProvider extends Component {
     }, 0);
   };
 
+  getQuantity = () => {
+    return this.state.cart.reduce((total, cartItem) => {
+      const item = cartItem[Object.keys(cartItem)];
+      return total + item.quantity;
+    }, 0);
+  };
+
   render() {
-    const { currency, cart } = this.state;
-    const { setCurrency, addToCart, removeFromCart, getTotal, getLocal } = this;
+    const { currency, cart, currencies } = this.state;
+    const {
+      setCurrency,
+      addToCart,
+      removeFromCart,
+      getTotal,
+      getLocal,
+      getQuantity,
+    } = this;
     return (
       <StoreContext.Provider
         value={{
+          currencies,
           currency,
           setCurrency,
           cart,
@@ -126,6 +156,7 @@ export default class StoreProvider extends Component {
           removeFromCart,
           getTotal,
           getLocal,
+          getQuantity,
         }}
       >
         {this.props.children}

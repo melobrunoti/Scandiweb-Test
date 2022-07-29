@@ -7,8 +7,8 @@ export default class CartPage extends Component {
   render() {
     return (
       <div>
-        <h1>Cart</h1>
-        <div>
+        <h1 className="cart-title">Cart</h1>
+        <div className="cart-page-container">
           <CartItems />
         </div>
       </div>
