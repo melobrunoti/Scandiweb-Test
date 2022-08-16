@@ -23,7 +23,9 @@ export default class Home extends Component {
     return (
       <>
         <h1 className="title">All</h1>
-        <div className="home">{products && <Card products={products} />}</div>
+        <div className="home-container">
+          {products && <Card products={products} />}
+        </div>
       </>
     );
   }

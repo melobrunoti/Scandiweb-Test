@@ -15,7 +15,7 @@
   flex-direction: column;
   margin: 2rem 5rem;
   background-color: #fff;
-  width: 38.6rem;
+  width: 34.6rem;
   height: 46.4rem;
   position: relative;
 
@@ -30,16 +30,17 @@
 
   &__button {
     position: absolute;
-    right: 8%;
-    bottom: 16%;
+    right: 20px;
+    bottom: -3.8rem;
     opacity: 0;
+    z-index: 10000;
   }
 
   &__image-container {
     width: 35.04rem;
     height: 36rem;
-    overflow: hidden;
     margin-bottom: 2rem;
+    position: relative;
   }
 
   &__image {
@@ -47,8 +48,8 @@
     padding: 1rem;
     align-self: none;
     width: 100%;
-    height: auto;
-    top: -2rem;
+    height: 100%;
+    overflow: hidden;
   }
 
   &__content {

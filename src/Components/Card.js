@@ -22,16 +22,16 @@ export default class Card extends Component {
                     alt={name}
                     className="product-card__image"
                   ></img>
+                  <Link to={`/product/${id}`} className="product-card__button">
+                    {' '}
+                    <img src={buyIcon} alt="go to cart" />{' '}
+                  </Link>
                 </div>
                 <div className="product-card__content">
                   <p>{name}</p>
                   <p>
                     <strong>{choosePriceAndSymbol(prices, currency)}</strong>
                   </p>
-                  <Link to={`/product/${id}`} className="product-card__button">
-                    {' '}
-                    <img src={buyIcon} alt="go to cart" />{' '}
-                  </Link>
                 </div>
               </div>
             );
