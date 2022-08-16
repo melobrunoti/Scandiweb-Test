@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 
 export default class Attributes extends Component {
   render() {
-    const { attribute, selectedAttributes, name, isCartItem } = this.props;
+    const { attribute, selectedAttributes, name, isCartItem, miniCart } =
+      this.props;
     return (
       <>
         {name === 'Color' ? (
           <div
             className={
               selectedAttributes && selectedAttributes[name] === attribute.value
-                ? 'color-selected-boder'
-                : 'color-not-selected-border'
+                ? `color-border color-selected-boder color-border-${miniCart}`
+                : `color-border color-not-selected-border color-border-${miniCart}`
             }
           >
             <div
@@ -18,13 +19,7 @@ export default class Attributes extends Component {
                 backgroundColor: attribute.value,
                 color: 'transparent',
               }}
-              className="color-selected"
-              /*  className={
-                selectedAttributes &&
-                selectedAttributes[name] === attribute.value
-                  ? 'color-selected'
-                  : 'attribute-block'
-              } */
+              className={`color-${miniCart}`}
               onClick={() => {
                 !isCartItem && this.props.setAttributes(name, attribute.value);
               }}
@@ -39,8 +34,8 @@ export default class Attributes extends Component {
             }
             className={
               selectedAttributes && selectedAttributes[name] === attribute.value
-                ? 'attribute attribute-selected'
-                : 'attribute attribute-not-selected'
+                ? `attribute attribute-selected attribute-${miniCart}`
+                : `attribute attribute-not-selected attribute-${miniCart}`
             }
             key={attribute.value}
           >

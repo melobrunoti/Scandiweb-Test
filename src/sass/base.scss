@@ -1,15 +1,11 @@
 :root {
+  --color-green: #5ece7b;
 
-  --color-green: #5ECE7B;
-  
+  --color-bg: #ffffff;
 
-  --color-bg: #FFFFFF;
-
-  --color-grey-dark:#1D1F22;
+  --color-grey-dark: #1d1f22;
 
   --shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
-
-
 }
 
 * {
@@ -19,7 +15,7 @@
 
 *,
 *::before,
-*::after{
+*::after {
   box-sizing: inherit;
 }
 
@@ -52,4 +48,19 @@ body {
 .green-button {
   color: white;
   background-color: var(--color-green);
+}
+
+.white-button {
+  background-color: white;
+  border: 1px solid black;
+  text-decoration: none;
+}
+
+.button-link,
+.button-link:visited {
+  text-decoration: none;
+  color: black;
+  width: 14rem;
+  height: 15rem;
+  padding: 1.5rem 3.5rem;
 }

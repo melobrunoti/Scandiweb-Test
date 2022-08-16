@@ -15,22 +15,9 @@ export default class CartItems extends Component {
   }
 
   render() {
-    const {
-      currency,
-      getTotal,
-      cart,
-      addToCart,
-      removeFromCart,
-      currencies,
-      getQuantity,
-    } = this.context;
+    const { currency, cart, addToCart, removeFromCart } = this.context;
 
-    const getSymbol = () => {
-      const symbol = currencies.find((c) => c.label === currency);
-      if (symbol) {
-        return symbol.symbol;
-      }
-    };
+    const { miniCart } = this.props;
 
     const nextImg = (index, length) => {
       this.setState((prevState) => {
@@ -38,8 +25,6 @@ export default class CartItems extends Component {
           !prevState.selectedImage.some((item) => item.id === index) &&
           length !== 1
         ) {
-          console.log(length);
-          console.log('cheguei');
           return {
             selectedImage: [
               ...prevState.selectedImage,
@@ -81,14 +66,15 @@ export default class CartItems extends Component {
     };
 
     return (
-      <div>
+      <div className={`container-${miniCart}`}>
+        {miniCart === 'small' && <h2 className="mini-cart-title">My Bag</h2>}
         {cart.length >= 1 && (
-          <div>
+          <div className={`container-${miniCart}-items`}>
             {cart.map((item, index) => {
               const product = item[Object.keys(item)];
               return (
-                <div className="cart-item__container" key={index}>
-                  <div>
+                <div className={`cart-item__container-${miniCart}`} key={index}>
+                  <div className={`cart-item-${miniCart}`}>
                     <h2 className="">{product.brand}</h2>
                     <h3 className="">{product.name}</h3>
                     <span>
@@ -114,6 +100,7 @@ export default class CartItems extends Component {
                                     selectedAttributes={product.selected}
                                     key={attribute.displayValue}
                                     isCartItem={true}
+                                    miniCart={miniCart}
                                   />
                                 );
                               })}
@@ -122,24 +109,30 @@ export default class CartItems extends Component {
                         ))}
                     </div>
                   </div>
-                  <div className="cart-item__image-container">
-                    <div className="cart-item__image-container-btn-container">
+                  <div
+                    className={`cart-item__image-container image-container-${miniCart}`}
+                  >
+                    <div
+                      className={`cart-item__image-container-btn-container-${miniCart}`}
+                    >
                       <button
                         onClick={() => addToCart(product)}
-                        className="cart-item__image-container-btn-container__btn"
+                        className={`cart-item__image-container-btn-container-${miniCart}__btn`}
                       >
                         +
                       </button>
                       <span>{product.quantity}</span>
                       <button
                         onClick={() => removeFromCart(product)}
-                        className="cart-item__image-container-btn-container__btn"
+                        className={`cart-item__image-container-btn-container-${miniCart}__btn`}
                       >
                         -
                       </button>
                     </div>
 
-                    <div className="cart-item__image-container-img">
+                    <div
+                      className={`cart-item__image-container-img-${miniCart}`}
+                    >
                       {product.gallery && (
                         <>
                           <img
@@ -170,18 +163,6 @@ export default class CartItems extends Component {
                 </div>
               );
             })}
-            <div className="order-container">
-              <h3>Tax 21%: {(getTotal() * 0.21).toFixed(2)}</h3>
-              <h3>Quantity: {getQuantity()}</h3>
-              <h3>
-                {' '}
-                {getSymbol()}
-                {getTotal().toFixed(2)}
-              </h3>
-              <button className="button green-button order-button">
-                Order
-              </button>
-            </div>
           </div>
         )}
       </div>

@@ -1,0 +1,117 @@
+.mini-cart {
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+
+  &-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &-total {
+    margin: 0 2rem;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  &-title {
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  &-button {
+    width: 14rem;
+    height: 4rem;
+    margin: 0 0.7rem;
+  }
+}
+
+.color-small {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.attribute {
+  &-small {
+    width: 3.5rem;
+    height: 3rem;
+    font-size: 1rem;
+    font-weight: 400;
+    text-align: center;
+  }
+}
+
+.container-small {
+  margin: 2rem;
+  overflow: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &-items {
+    height: 47rem;
+  }
+}
+
+.cart-item {
+  &-small {
+    align-self: flex-start;
+    font-weight: normal;
+    font-family: 'Raleway', sans-serif;
+  }
+
+  &__container-small {
+    display: flex;
+    h3,
+    h2,
+    span {
+      font-size: 1.6rem;
+      font-weight: normal;
+    }
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+  }
+
+  &__image-container {
+    display: flex;
+    align-items: flex-end;
+
+    &-btn-container-small {
+      height: 20rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      margin-right: 2rem;
+      align-items: center;
+      align-self: flex-start;
+
+      &__btn {
+        font-family: monospace;
+        display: flex;
+        width: 2.4rem;
+        height: 2.4rem;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5rem;
+        font-weight: 400;
+        background-color: #fff;
+        border: 1px solid black;
+        border-radius: 2px;
+        cursor: pointer;
+      }
+    }
+
+    &-img-small {
+      display: flex;
+      position: relative;
+      height: 19rem;
+      width: 12rem;
+      max-width: 15rem;
+      align-self: flex-start;
+      z-index: 0;
+    }
+  }
+}

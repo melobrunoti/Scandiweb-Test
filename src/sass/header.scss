@@ -1,38 +1,43 @@
 .header {
-  position: relative;
   display: flex;
   padding: 2rem;
   justify-content: space-between;
   text-transform: uppercase;
-  margin: 0 11.7rem;
+  padding: 0 11.7rem;
   align-items: center;
   height: 10vh;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  background-color: white;
+  height: 10%;
 }
 
 .logo {
-  position: absolute;
-  right: 50.0%;
-  right: 50.0%;
-  top: 20.75%;
-  bottom: 29.47%;
+  width: 25rem;
+  display: flex;
+
+  img {
+    margin: auto;
+  }
 }
 
 .nav {
+  width: 25rem;
+  justify-content: center;
   &__link {
     margin-right: 2rem;
     text-decoration: none;
     color: inherit;
-  
 
-  &:hover {
-    color: var(--color-green);
-    border-bottom: 2px solid (var(--color-green));
-    padding-bottom: 1.3rem;
-    transition: all .2s;
+    &:hover {
+      color: var(--color-green);
+      border-bottom: 2px solid (var(--color-green));
+      padding-bottom: 1.3rem;
+      transition: all 0.2s;
+    }
   }
-
-}
-
 }
 
 .select {
@@ -42,14 +47,13 @@
   border: 0;
   background-color: transparent;
 
- &:focus{
-  border: none; 
- }
+  &:focus {
+    border: none;
+  }
 
- &:hover {
-  background-color: #EEEEEE;
-}
-
+  &:hover {
+    background-color: #eeeeee;
+  }
 }
 
 option {
@@ -59,19 +63,14 @@ option {
   border: none;
 
   &:hover {
-    background-color: #EEEEEE;
+    background-color: #eeeeee;
   }
- }
+}
 
- .selected {
+.selected {
   background-color: DodgerBlue;
 }
 
-.cart-container {
-  display: flex;
-  align-items: center;
-}
-
-.cart { 
-  margin-top: .5rem;
+.cart {
+  margin-top: 0.5rem;
 }

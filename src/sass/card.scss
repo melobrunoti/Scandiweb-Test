@@ -1,16 +1,14 @@
-
 .title {
-  margin: 8rem 10rem;
+  padding: 8rem 10rem;
+  margin-top: 5rem;
 }
-
 
 .home {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   margin: 2rem;
- }
-
+}
 
 .product-card {
   display: flex;
@@ -20,13 +18,12 @@
   width: 38.6rem;
   height: 46.4rem;
   position: relative;
- 
- 
-  &:hover  &__button {
+
+  &:hover &__button {
     opacity: 1;
-    transition: all .5s;
+    transition: all 0.5s;
   }
-  
+
   &:hover {
     box-shadow: var(--shadow);
   }
@@ -36,7 +33,6 @@
     right: 8%;
     bottom: 16%;
     opacity: 0;
-
   }
 
   &__image-container {
@@ -44,11 +40,10 @@
     height: 36rem;
     overflow: hidden;
     margin-bottom: 2rem;
-
   }
 
   &__image {
-    position: relative; 
+    position: relative;
     padding: 1rem;
     align-self: none;
     width: 100%;
@@ -61,6 +56,5 @@
     flex-direction: column;
     font-weight: 300;
     margin-left: 2rem;
-
   }
 }

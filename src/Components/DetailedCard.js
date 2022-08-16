@@ -84,6 +84,7 @@ export default class DetailedCard extends Component {
                               setAttributes={setAttributes}
                               key={attribute.displayValue}
                               isCartItem={false}
+                              miniCart={'regular'}
                             />
                           );
                         })}
