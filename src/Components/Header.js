@@ -27,7 +27,7 @@ export default class Header extends Component {
   }
 
   render() {
-    const { currency, setCurrency, currencies } = this.context;
+    const { currency, setCurrency, currencies, getTotalLength } = this.context;
     const { categories } = this.state;
 
     const toggleCart = () => {
@@ -47,9 +47,8 @@ export default class Header extends Component {
               })}
           </nav>
 
-          <div className="logo">
-            <img src={logo} alt="logo" />
-          </div>
+          <img className="logo" src={logo} alt="logo" />
+
           <div className="cart-container">
             <label htmlFor="currency">$</label>
             <select
@@ -73,6 +72,11 @@ export default class Header extends Component {
               alt="cart-icon"
             />
             {/* </Link> */}
+            <span
+              className={getTotalLength() === 0 ? 'hide-length' : 'cartLength '}
+            >
+              {getTotalLength()}
+            </span>
           </div>
         </div>
         <div className={this.state.isOpen ? 'show-cart' : 'hide-cart'}>

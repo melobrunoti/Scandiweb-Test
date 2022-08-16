@@ -67,10 +67,10 @@ body {
   height: 10%; }
 
 .logo {
-  width: 25rem;
-  display: flex; }
-  .logo img {
-    margin: auto; }
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  margin: 0 auto; }
 
 .nav {
   width: 25rem;
@@ -109,6 +109,29 @@ option {
 
 .cart {
   margin-top: 0.5rem; }
+
+.cart-container {
+  position: relative; }
+
+.cartLength {
+  display: flex;
+  height: 2rem;
+  width: 2rem;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  color: white;
+  position: absolute;
+  z-index: 5000;
+  top: 0px;
+  right: -1rem;
+  font-family: 'Roboto';
+  font-weight: bold; }
+
+.hide-length {
+  display: none; }
 
 .home {
   display: flex;

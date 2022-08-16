@@ -128,6 +128,13 @@ export default class StoreProvider extends Component {
     }, 0);
   };
 
+  getTotalLength = () => {
+    return this.state.cart.reduce((total, cartItem) => {
+      const item = cartItem[Object.keys(cartItem)];
+      return total + item.quantity;
+    }, 0);
+  };
+
   getQuantity = () => {
     return this.state.cart.reduce((total, cartItem) => {
       const item = cartItem[Object.keys(cartItem)];
@@ -144,6 +151,7 @@ export default class StoreProvider extends Component {
       getTotal,
       getLocal,
       getQuantity,
+      getTotalLength,
     } = this;
     return (
       <StoreContext.Provider
@@ -157,6 +165,7 @@ export default class StoreProvider extends Component {
           getTotal,
           getLocal,
           getQuantity,
+          getTotalLength,
         }}
       >
         {this.props.children}
