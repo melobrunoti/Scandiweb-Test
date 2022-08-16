@@ -26,6 +26,10 @@ export default class Header extends Component {
     this.setState((prevState) => ({ categories }));
   }
 
+  closeCart = (e) => {
+    if (e.target.className === 'show-cart') this.setState({ isOpen: false });
+  };
+
   render() {
     const { currency, setCurrency, currencies, getTotalLength } = this.context;
     const { categories } = this.state;
@@ -79,7 +83,10 @@ export default class Header extends Component {
             </span>
           </div>
         </div>
-        <div className={this.state.isOpen ? 'show-cart' : 'hide-cart'}>
+        <div
+          onClick={(e) => this.closeCart(e)}
+          className={this.state.isOpen ? 'show-cart' : 'hide-cart'}
+        >
           <Cart />
         </div>
       </>
