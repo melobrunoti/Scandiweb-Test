@@ -184,6 +184,18 @@ option {
     font-weight: 300;
     margin-left: 2rem; }
 
+.out-of-stock {
+  opacity: 0.5; }
+  .out-of-stock h3 {
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    text-transform: uppercase;
+    font-weight: 100;
+    font-size: 2.4rem;
+    line-height: 38.4px;
+    line-height: 160%; }
+
 .detailed-container {
   height: 90vh;
   display: flex;
