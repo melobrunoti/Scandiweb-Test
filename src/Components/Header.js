@@ -14,7 +14,12 @@ import arrowDown from '../assets/arrowDown.svg';
 export default class Header extends Component {
   constructor() {
     super();
-    this.state = { categories: '', isOpen: false, isCurrenciesOpen: false };
+    this.state = {
+      categories: '',
+      isOpen: false,
+      isCurrenciesOpen: false,
+      activePage: 'all',
+    };
   }
 
   static contextType = StoreContext;
@@ -34,7 +39,7 @@ export default class Header extends Component {
   };
 
   render() {
-    const { currency, setCurrency, currencies, getTotalLength } = this.context;
+    const { getTotalLength } = this.context;
     const { categories } = this.state;
 
     const toggleCart = () => {
@@ -47,7 +52,16 @@ export default class Header extends Component {
             {categories &&
               categories.map(({ name }) => {
                 return (
-                  <Link className="nav__link" key={name} to={`/${name}`}>
+                  <Link
+                    key={name}
+                    to={`/${name}`}
+                    onClick={() => this.setState(() => ({ activePage: name }))}
+                    className={
+                      this.state.activePage === name
+                        ? 'nav__link active'
+                        : 'nav__link'
+                    }
+                  >
                     {name}
                   </Link>
                 );

@@ -113,3 +113,10 @@
     background-color: #eeeeee;
   }
 }
+
+.active {
+  color: var(--color-green);
+  border-bottom: 2px solid (var(--color-green));
+  padding-bottom: 1.3rem;
+  transition: all 0.2s;
+}
