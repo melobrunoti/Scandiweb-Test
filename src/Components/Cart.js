@@ -16,7 +16,7 @@ export default class Cart extends Component {
     };
 
     return (
-      <div className="test">
+      <div className="show-cart-container">
         <CartItems miniCart="small" />
         <div className="mini-cart-container">
           <h3 className="mini-cart-total">Total: </h3>
