@@ -7,11 +7,14 @@ import { Link } from 'react-router-dom';
 import logo from '../assets/logo.svg';
 import cart from '../assets/cart.svg';
 import Cart from './Cart';
+import CustomSelect from './CustomSelect';
+import arrowUp from '../assets/arrowUp.svg';
+import arrowDown from '../assets/arrowDown.svg';
 
 export default class Header extends Component {
   constructor() {
     super();
-    this.state = { categories: '', isOpen: false };
+    this.state = { categories: '', isOpen: false, isCurrenciesOpen: false };
   }
 
   static contextType = StoreContext;
@@ -54,20 +57,22 @@ export default class Header extends Component {
           <img className="logo" src={logo} alt="logo" />
 
           <div className="cart-container">
-            <label htmlFor="currency">$</label>
-            <select
-              className="select"
-              value={currency}
-              onChange={(e) => {
-                setCurrency(e.target.value);
-              }}
+            <div
+              className="currency"
+              onClick={() =>
+                this.setState(() => ({
+                  isCurrenciesOpen: !this.state.isCurrenciesOpen,
+                }))
+              }
             >
-              {currencies.map(({ label, symbol }) => (
-                <option className="option" key={label} value={label}>
-                  {`${symbol} ${label}`}
-                </option>
-              ))}
-            </select>
+              $
+              {this.state.isCurrenciesOpen ? (
+                <img src={arrowUp} alt="close currencies"></img>
+              ) : (
+                <img src={arrowDown} alt="open currencies"></img>
+              )}
+            </div>
+
             {/* <Link to={'/cart'}> */}
             <img
               onClick={() => toggleCart()}
@@ -82,6 +87,13 @@ export default class Header extends Component {
               {getTotalLength()}
             </span>
           </div>
+        </div>
+        <div
+          className={
+            this.state.isCurrenciesOpen ? 'show-currencies' : 'hide-currencies'
+          }
+        >
+          <CustomSelect />
         </div>
         <div
           onClick={(e) => this.closeCart(e)}

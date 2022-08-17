@@ -85,25 +85,6 @@ body {
       padding-bottom: 1.3rem;
       transition: all 0.2s; }
 
-.select {
-  cursor: pointer;
-  width: 2rem;
-  font-size: 1.8rem;
-  border: 0;
-  background-color: transparent; }
-  .select:focus {
-    border: none; }
-  .select:hover {
-    background-color: #eeeeee; }
-
-option {
-  color: var(--color-grey-dark);
-  font-size: 1.8rem;
-  font-weight: 500;
-  border: none; }
-  option:hover {
-    background-color: #eeeeee; }
-
 .selected {
   background-color: DodgerBlue; }
 
@@ -111,7 +92,8 @@ option {
   margin-top: 0.5rem; }
 
 .cart-container {
-  position: relative; }
+  position: relative;
+  display: flex; }
 
 .cartLength {
   display: flex;
@@ -132,6 +114,38 @@ option {
 
 .hide-length {
   display: none; }
+
+.currency {
+  margin-top: 0.5rem;
+  margin-right: 2rem; }
+  .currency img {
+    width: 1.2rem;
+    margin: 0 1rem; }
+
+.hide-currencies {
+  display: none; }
+
+.select {
+  cursor: pointer;
+  width: 10rem;
+  font-size: 1.8rem;
+  position: fixed;
+  top: 9.8rem;
+  right: 15rem;
+  background-color: white;
+  z-index: 3000;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.09);
+  padding-left: 2rem;
+  font-weight: bold; }
+  .select:focus {
+    border: none; }
+
+.option {
+  font-size: 1.8rem;
+  font-weight: 500;
+  border: none; }
+  .option:hover {
+    background-color: #eeeeee; }
 
 .home {
   display: flex;
