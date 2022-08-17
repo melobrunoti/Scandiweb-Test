@@ -5,6 +5,7 @@ export default class CustomSelect extends Component {
   static contextType = StoreContext;
   render() {
     const { setCurrency, currencies } = this.context;
+    const { toggleCurrency } = this.props;
     return (
       <div>
         <div className="select">
@@ -14,6 +15,7 @@ export default class CustomSelect extends Component {
               key={label}
               onClick={() => {
                 setCurrency(label);
+                toggleCurrency();
               }}
             >
               {`${symbol} ${label}`}

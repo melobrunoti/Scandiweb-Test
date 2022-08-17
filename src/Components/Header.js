@@ -45,6 +45,12 @@ export default class Header extends Component {
     const toggleCart = () => {
       this.setState((prevState) => ({ isOpen: !this.state.isOpen }));
     };
+
+    const toggleCurrency = () => {
+      this.setState(() => ({
+        isCurrenciesOpen: !this.state.isCurrenciesOpen,
+      }));
+    };
     return (
       <>
         <div className="header">
@@ -71,14 +77,7 @@ export default class Header extends Component {
           <img className="logo" src={logo} alt="logo" />
 
           <div className="cart-container">
-            <div
-              className="currency"
-              onClick={() =>
-                this.setState(() => ({
-                  isCurrenciesOpen: !this.state.isCurrenciesOpen,
-                }))
-              }
-            >
+            <div className="currency" onClick={() => toggleCurrency()}>
               $
               {this.state.isCurrenciesOpen ? (
                 <img src={arrowUp} alt="close currencies"></img>
@@ -107,7 +106,7 @@ export default class Header extends Component {
             this.state.isCurrenciesOpen ? 'show-currencies' : 'hide-currencies'
           }
         >
-          <CustomSelect />
+          <CustomSelect toggleCurrency={toggleCurrency} />
         </div>
         <div
           onClick={(e) => this.closeCart(e)}
