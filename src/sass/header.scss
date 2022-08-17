@@ -97,7 +97,6 @@
   background-color: white;
   z-index: 3000;
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.09);
-  padding-left: 2rem;
   font-weight: bold;
 
   &:focus {
@@ -108,6 +107,7 @@
   font-size: 1.8rem;
   font-weight: 500;
   border: none;
+  padding-left: 2rem;
 
   &:hover {
     background-color: #eeeeee;
