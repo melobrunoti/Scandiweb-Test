@@ -9,44 +9,47 @@ export default class Card extends Component {
 
   render() {
     const products = this.props.products;
-    const { currency } = this.context;
+    const { currency } = this.context || {};
     return (
       <div className="home">
         {products &&
-          products.map(({ name, gallery, prices, inStock, category, id }) => {
-            return (
-              <div
-                key={name}
-                className={
-                  inStock ? 'product-card' : 'product-card out-of-stock'
-                }
-              >
-                <div className="product-card__image-container">
-                  <img
-                    src={gallery[0]}
-                    alt={name}
-                    className="product-card__image"
-                  ></img>
-                  {!inStock && <h3>Out of stock</h3>}
-                  {inStock && (
-                    <Link
-                      to={`/product/${id}`}
-                      className="product-card__button"
-                    >
-                      {' '}
-                      <img src={buyIcon} alt="go to cart" />{' '}
-                    </Link>
-                  )}
+          products.map(
+            ({ name, gallery, prices, inStock, category, id }, index) => {
+              return (
+                <div
+                  key={name}
+                  data-testid={`product-${index}`}
+                  className={
+                    inStock ? 'product-card' : 'product-card out-of-stock'
+                  }
+                >
+                  <div className="product-card__image-container">
+                    <img
+                      src={gallery[0]}
+                      alt={name}
+                      className="product-card__image"
+                    ></img>
+                    {!inStock && <h3>Out of stock</h3>}
+                    {inStock && (
+                      <Link
+                        to={`/product/${id}`}
+                        className="product-card__button"
+                      >
+                        {' '}
+                        <img src={buyIcon} alt="go to cart" />{' '}
+                      </Link>
+                    )}
+                  </div>
+                  <div className="product-card__content">
+                    <p>{name}</p>
+                    <p>
+                      <strong>{choosePriceAndSymbol(prices, currency)}</strong>
+                    </p>
+                  </div>
                 </div>
-                <div className="product-card__content">
-                  <p>{name}</p>
-                  <p>
-                    <strong>{choosePriceAndSymbol(prices, currency)}</strong>
-                  </p>
-                </div>
-              </div>
-            );
-          })}
+              );
+            }
+          )}
       </div>
     );
   }

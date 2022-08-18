@@ -7,16 +7,23 @@ export default class Tech extends Component {
   constructor() {
     super();
     this.state = { products: [] };
+
+    this._isMounted = false;
   }
 
   async componentDidMount() {
+    this._isMounted = true;
     const fetchAllProducts = await client.query({
       query: loadTechProducts,
     });
 
     const products = fetchAllProducts.data.category.products;
 
-    this.setState((prevState) => ({ products }));
+    this._isMounted === true && this.setState(() => ({ products }));
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
   render() {
     const { products } = this.state;

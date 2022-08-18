@@ -6,6 +6,11 @@ import { loadCurrencies } from '../GraphQL/CurrencyQueries';
 import client from '../Connection/Client';
 
 export default class StoreProvider extends Component {
+  constructor(props) {
+    super(props);
+
+    // rest of your code
+  }
   // Context state
   state = {
     currency: 'USD',
@@ -14,8 +19,9 @@ export default class StoreProvider extends Component {
   };
 
   async componentDidMount() {
-    this.getCurrencyFromLocalStorage();
-    this.getCartFromLocalStorage();
+    this._isMounted = true;
+    this._isMounted === true && this.getCurrencyFromLocalStorage();
+    this._isMounted === true && this.getCartFromLocalStorage();
 
     const fetchCurrencies = await client.query({
       query: loadCurrencies,
@@ -23,11 +29,16 @@ export default class StoreProvider extends Component {
 
     const currencies = fetchCurrencies.data.currencies;
 
-    this.setState((prevState) => ({ currencies }));
+    this._isMounted === true && this.setState(() => ({ currencies }));
   }
 
   componentDidUpdate() {
-    localStorage.setItem('cart', JSON.stringify(this.state.cart));
+    this._isMounted === true &&
+      localStorage.setItem('cart', JSON.stringify(this.state.cart));
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   setCurrency = (currency) => {

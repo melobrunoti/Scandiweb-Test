@@ -7,17 +7,24 @@ export default class Home extends Component {
   constructor() {
     super();
     this.state = { products: [] };
+    this._isMounted = false;
   }
 
   async componentDidMount() {
+    this._isMounted = true;
     const fetchAllProducts = await client.query({
       query: loadAllProducts,
     });
 
     const products = fetchAllProducts.data.category.products;
 
-    this.setState((prevState) => ({ products }));
+    this._isMounted === true && this.setState(() => ({ products }));
   }
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
   render() {
     const { products } = this.state;
     return (
