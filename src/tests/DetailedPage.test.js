@@ -7,7 +7,7 @@ import userEvent from '@testing-library/user-event';
 
 import App from '../App';
 
-describe('Test detailed page', () => {
+describe('Add to cart flux', () => {
   test('should be able to add a product to cart', async () => {
     render(
       <StoreProvider>
