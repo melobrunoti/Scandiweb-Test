@@ -34,6 +34,7 @@ export default class Card extends Component {
                       <Link
                         to={`/product/${id}`}
                         className="product-card__button"
+                        data-testid="buy-button"
                       >
                         {' '}
                         <img src={buyIcon} alt="go to cart" />{' '}
