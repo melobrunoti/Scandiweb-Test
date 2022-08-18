@@ -8,6 +8,7 @@ export default class DetailedPage extends Component {
     super();
     this.state = { product: {}, selectedAttributes: {} };
     this.setAttributes = this.setAttributes.bind(this);
+    this._isMounted = false;
   }
 
   setAttributes(key, value) {
@@ -17,6 +18,7 @@ export default class DetailedPage extends Component {
   }
 
   async componentDidMount() {
+    this._isMounted = true;
     const { id } = await this.props.match.params;
 
     const fetchProduct = await client.query({
@@ -25,7 +27,11 @@ export default class DetailedPage extends Component {
 
     const product = fetchProduct.data.product;
 
-    this.setState((prevState) => ({ product }));
+    this._isMounted === true && this.setState(() => ({ product }));
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   render() {
@@ -43,3 +49,5 @@ export default class DetailedPage extends Component {
     );
   }
 }
+
+export { DetailedPage };

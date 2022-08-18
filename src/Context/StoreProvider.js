@@ -10,6 +10,7 @@ export default class StoreProvider extends Component {
     super(props);
 
     // rest of your code
+    this._isMounted = false;
   }
   // Context state
   state = {
@@ -73,7 +74,6 @@ export default class StoreProvider extends Component {
           (item) => Object.keys(item).toString() === customId
         )
       ) {
-        console.log('first time');
         const createItem = [
           ...prevState.cart,
           { [customId]: { ...product, quantity: 1 } },

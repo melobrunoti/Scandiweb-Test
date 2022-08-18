@@ -95,6 +95,7 @@ export default class Header extends Component {
             />
             {/* </Link> */}
             <span
+              data-testid="cartLength"
               className={getTotalLength() === 0 ? 'hide-length' : 'cartLength '}
             >
               {getTotalLength()}
