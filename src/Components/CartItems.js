@@ -140,22 +140,24 @@ export default class CartItems extends Component {
                             alt={product.name}
                             className="cart-item__image"
                           />
-                          <div className="cart-item__image__buttons">
-                            <button
-                              className="cart-item__image__buttons__btn"
-                              onClick={() => previusImg(index)}
-                            >
-                              {<img src={arrowLeft} alt="previous img" />}
-                            </button>
-                            <button
-                              className="cart-item__image__buttons__btn"
-                              onClick={() =>
-                                nextImg(index, product.gallery.length)
-                              }
-                            >
-                              {<img src={arrowRight} alt="next img" />}
-                            </button>
-                          </div>
+                          {product.gallery.length > 1 && (
+                            <div className="cart-item__image__buttons">
+                              <button
+                                className="cart-item__image__buttons__btn"
+                                onClick={() => previusImg(index)}
+                              >
+                                {<img src={arrowLeft} alt="previous img" />}
+                              </button>
+                              <button
+                                className="cart-item__image__buttons__btn"
+                                onClick={() =>
+                                  nextImg(index, product.gallery.length)
+                                }
+                              >
+                                {<img src={arrowRight} alt="next img" />}
+                              </button>
+                            </div>
+                          )}
                         </>
                       )}
                     </div>
