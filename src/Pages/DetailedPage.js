@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DetailedCard from '../Components/DetailedCard';
 import client from '../Connection/Client';
+import StoreContext from '../Context/StoreContext';
 import { loadDetailedProduct } from '../GraphQL/DetailedProductQueries';
 
 export default class DetailedPage extends Component {
@@ -10,6 +11,8 @@ export default class DetailedPage extends Component {
     this.setAttributes = this.setAttributes.bind(this);
     this._isMounted = false;
   }
+
+  static contextType = StoreContext;
 
   setAttributes(key, value) {
     this.setState(({ selectedAttributes }) => ({
@@ -36,8 +39,9 @@ export default class DetailedPage extends Component {
 
   render() {
     const { product, selectedAttributes } = this.state;
+    const { closeCurrency } = this.context;
     return (
-      <div className="detailed-container">
+      <div onClick={() => closeCurrency()} className="detailed-container">
         {
           <DetailedCard
             product={product}

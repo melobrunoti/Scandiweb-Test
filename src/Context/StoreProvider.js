@@ -9,14 +9,14 @@ export default class StoreProvider extends Component {
   constructor(props) {
     super(props);
 
-    // rest of your code
     this._isMounted = false;
   }
-  // Context state
+
   state = {
     currency: 'USD',
     cart: [],
     currencies: [],
+    isCurrenciesOpen: false,
   };
 
   async componentDidMount() {
@@ -41,6 +41,18 @@ export default class StoreProvider extends Component {
   componentWillUnmount() {
     this._isMounted = false;
   }
+
+  toggleCurrency = () => {
+    this.setState(() => ({
+      isCurrenciesOpen: !this.state.isCurrenciesOpen,
+    }));
+  };
+
+  closeCurrency = () => {
+    this.setState(() => ({
+      isCurrenciesOpen: false,
+    }));
+  };
 
   setCurrency = (currency) => {
     this.setState(() => ({ currency }));
@@ -154,7 +166,7 @@ export default class StoreProvider extends Component {
   };
 
   render() {
-    const { currency, cart, currencies } = this.state;
+    const { currency, cart, currencies, isCurrenciesOpen } = this.state;
     const {
       setCurrency,
       addToCart,
@@ -163,10 +175,13 @@ export default class StoreProvider extends Component {
       getLocal,
       getQuantity,
       getTotalLength,
+      toggleCurrency,
+      closeCurrency,
     } = this;
     return (
       <StoreContext.Provider
         value={{
+          isCurrenciesOpen,
           currencies,
           currency,
           setCurrency,
@@ -177,6 +192,8 @@ export default class StoreProvider extends Component {
           getLocal,
           getQuantity,
           getTotalLength,
+          toggleCurrency,
+          closeCurrency,
         }}
       >
         {this.props.children}

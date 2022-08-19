@@ -17,7 +17,6 @@ export default class Header extends Component {
     this.state = {
       categories: '',
       isOpen: false,
-      isCurrenciesOpen: false,
       activePage: 'all',
     };
   }
@@ -39,18 +38,13 @@ export default class Header extends Component {
   };
 
   render() {
-    const { getTotalLength } = this.context;
+    const { getTotalLength, toggleCurrency, isCurrenciesOpen } = this.context;
     const { categories } = this.state;
 
     const toggleCart = () => {
       this.setState((prevState) => ({ isOpen: !this.state.isOpen }));
     };
 
-    const toggleCurrency = () => {
-      this.setState(() => ({
-        isCurrenciesOpen: !this.state.isCurrenciesOpen,
-      }));
-    };
     return (
       <>
         <div className="header">
@@ -79,21 +73,20 @@ export default class Header extends Component {
           <div className="cart-container">
             <div className="currency" onClick={() => toggleCurrency()}>
               $
-              {this.state.isCurrenciesOpen ? (
+              {isCurrenciesOpen ? (
                 <img src={arrowUp} alt="close currencies"></img>
               ) : (
                 <img src={arrowDown} alt="open currencies"></img>
               )}
             </div>
 
-            {/* <Link to={'/cart'}> */}
             <img
               onClick={() => toggleCart()}
               className="cart"
               src={cart}
               alt="cart-icon"
             />
-            {/* </Link> */}
+
             <span
               data-testid="cartLength"
               className={getTotalLength() === 0 ? 'hide-length' : 'cartLength '}
@@ -103,9 +96,7 @@ export default class Header extends Component {
           </div>
         </div>
         <div
-          className={
-            this.state.isCurrenciesOpen ? 'show-currencies' : 'hide-currencies'
-          }
+          className={isCurrenciesOpen ? 'show-currencies' : 'hide-currencies'}
         >
           <CustomSelect toggleCurrency={toggleCurrency} />
         </div>

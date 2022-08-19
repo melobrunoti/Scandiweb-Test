@@ -5,7 +5,8 @@ import StoreContext from '../Context/StoreContext';
 export default class CartPage extends Component {
   static contextType = StoreContext;
   render() {
-    const { currency, getTotal, currencies, getQuantity } = this.context;
+    const { currency, getTotal, currencies, getQuantity, closeCurrency } =
+      this.context;
 
     const getSymbol = () => {
       const symbol = currencies.find((c) => c.label === currency);
@@ -15,7 +16,7 @@ export default class CartPage extends Component {
     };
 
     return (
-      <div className="order-container">
+      <div onClick={() => closeCurrency()} className="order-container">
         <h1 className="cart-title">Cart</h1>
         <div className="cart-page-container">
           <CartItems miniCart="regular" />
