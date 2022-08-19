@@ -9,10 +9,11 @@ export default class CustomSelect extends Component {
     return (
       <div>
         <div className="select">
-          {currencies.map(({ label, symbol }) => (
+          {currencies.map(({ label, symbol }, index) => (
             <div
               className="option"
               key={label}
+              data-testid={`currency-${index}`}
               onClick={() => {
                 setCurrency(label);
                 toggleCurrency();
