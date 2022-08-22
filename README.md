@@ -1,4 +1,4 @@
-# Scandiweb React Test by Bruno Melo.
+# Scandiweb React Test.
 
 The project was a e-commerce of various kinds of products using react.
 
