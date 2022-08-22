@@ -33,7 +33,7 @@ The project was a e-commerce of various kinds of products using react.
 
 ### 🔧 Running the project
 
-### Run the server avaible in this repository :
+### Run the server available in this repository :
 
 https://github.com/scandiweb/junior-react-endpoint
 
@@ -54,7 +54,8 @@ npm start
 ## ⚙️ Running the tests
 
 
-
 ```
 npm run test
 ```
+
+Developed by Bruno Melo.
